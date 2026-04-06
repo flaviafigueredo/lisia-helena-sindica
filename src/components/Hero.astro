@@ -1,0 +1,63 @@
+---
+import { Image } from "astro:assets";
+import heroBgImage from "../assets/hero-bg-image.png";
+---
+
+<section
+  class="relative flex items-center px-8 overflow-hidden py-16 lg:pt-0 lg:pb-0 lg:min-h-[100svh]"
+>
+  <div class="absolute inset-0 z-0">
+    <Image
+      class="w-full h-full object-cover opacity-40"
+      alt="Vista noturna de um arranha-céu contemporâneo de luxo com luzes quentes e reflexo do céu azul profundo"
+      src={heroBgImage}
+    />
+    <div
+      class="absolute inset-0 bg-linear-to-r from-background via-background/80 to-transparent"
+    >
+    </div>
+  </div>
+
+  <div class="relative z-20 max-w-4xl">
+    <div class="flex items-center gap-3 mb-6">
+      <span class="w-2 h-2 bg-primary animate-pulse"></span>
+      <span
+        class="font-label text-primary text-[10px] tracking-[0.3em] uppercase"
+        >GESTÃO ATIVA E TRANSPARENTE</span
+      >
+    </div>
+
+    <h1
+      class="font-headline text-4xl md:text-5xl leading-tight text-white mb-8"
+    >
+      A Nova Era da Valorização do Seu <span
+        class="italic text-on-surface-variant">Patrimônio</span
+      > em Porto Alegre.
+    </h1>
+
+    <p
+      class="text-on-surface-variant text-lg max-w-xl mb-12 font-light leading-relaxed"
+    >
+      Gestão condominial elevada ao nível de hospitalidade executiva. Duas
+      décadas de transparência absoluta, equilíbrio financeiro e
+      responsabilidade para transformar condomínios em ativos seguros e
+      pacíficos.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-6">
+      <a
+        href="#"
+        aria-label="Falar com Lisia Helena no WhatsApp"
+        target="_blank"
+        class="js-wa-link bg-primary text-on-primary px-8 py-4 font-label text-xs uppercase tracking-[0.2em] font-bold gold-glow hover:scale-105 transition-all w-fit text-center"
+      >
+        Solicitar Consultoria
+      </a>
+    </div>
+  </div>
+
+  <div
+    class="absolute bottom-0 left-0 w-full h-48 bg-linear-to-t from-background to-transparent z-10 pointer-events-none"
+  >
+  </div>
+</section>

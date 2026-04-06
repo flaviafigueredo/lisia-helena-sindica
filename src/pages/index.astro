@@ -1,0 +1,50 @@
+---
+import "../styles/global.css";
+import AnimatedBackground from "../components/AnimatedBackground.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import ExecutiveProfile from "../components/ExecutiveProfile.astro";
+import Services from "../components/Services.astro";
+import Faq from "../components/Faq.astro";
+import FinalCTA from "../components/FinalCTA.astro";
+import Footer from "../components/Footer.astro";
+import FloatingWhatsApp from "../components/FloatingWhatsApp.astro";
+import WhatsAppScript from "../components/WhatsAppScript.astro";
+---
+
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta name="viewport" content="width=device-width" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+
+    <title>Lísia Helena Guerra | Gestão Condominial</title>
+  </head>
+  <body
+    class="font-body text-on-surface selection:bg-primary selection:text-on-primary"
+  >
+    <AnimatedBackground />
+    <Header />
+    <main class="pt-20">
+      <Hero />
+      <ExecutiveProfile />
+      <Services />
+      <Faq />
+      <FinalCTA />
+    </main>
+    <Footer />
+    <FloatingWhatsApp />
+    <WhatsAppScript />
+  </body>
+</html>

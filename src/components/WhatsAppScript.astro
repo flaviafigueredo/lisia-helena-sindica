@@ -1,0 +1,20 @@
+---
+import { WA_COUNTRY, WA_DDD, WA_NUM, WA_MSG } from "../config.js";
+---
+
+<script define:vars={{ WA_COUNTRY, WA_DDD, WA_NUM, WA_MSG }}>
+  // Quando o site carregar no navegador do usuário esse script procura todos os botões que tenham a classe js-wa-link
+  const waButtons = document.querySelectorAll(".js-wa-link");
+
+  waButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault(); // Impede o botão de tentar navegar para lugar nenhum
+
+      // Monta o link apenas no milissegundo do clique
+      const fullUrl = `https://wa.me/${WA_COUNTRY}${WA_DDD}${WA_NUM}?text=${encodeURIComponent(WA_MSG)}`;
+
+      // Abre em uma nova aba
+      window.open(fullUrl, "_blank");
+    });
+  });
+</script>
