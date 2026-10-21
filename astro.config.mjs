@@ -5,6 +5,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  // Trocar pelo domínio próprio quando for registrado
+  site: 'https://lisia-helena-sindica.vercel.app',
   vite: {
     plugins: [tailwindcss()]
   }

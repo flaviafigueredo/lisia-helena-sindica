@@ -11,6 +11,18 @@ import FinalCTA from "../components/FinalCTA.astro";
 import Footer from "../components/Footer.astro";
 import FloatingWhatsApp from "../components/FloatingWhatsApp.astro";
 import WhatsAppScript from "../components/WhatsAppScript.astro";
+import { getImage } from "astro:assets";
+import sharePhoto from "../assets/about-photo.avif";
+
+const title = "Lísia Helena Guerra | Gestão Condominial";
+const description =
+  "Síndica profissional em Porto Alegre, com 19 anos de experiência em gestão condominial. Controle financeiro, manutenção, contratos e mediação de conflitos com transparência.";
+
+// Imagem de compartilhamento (WhatsApp, redes sociais). Precisa de URL absoluta,
+// então só é gerada quando `site` está definido em astro.config.mjs.
+const shareImage = await getImage({ src: sharePhoto, width: 1200, format: "jpg" });
+const shareImageUrl = Astro.site ? new URL(shareImage.src, Astro.site).href : undefined;
+const pageUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
 ---
 
 <html lang="pt-BR">
@@ -30,7 +42,19 @@ import WhatsAppScript from "../components/WhatsAppScript.astro";
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
 
-    <title>Lísia Helena Guerra | Gestão Condominial</title>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {pageUrl && <link rel="canonical" href={pageUrl} />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Lísia Helena Guerra" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {pageUrl && <meta property="og:url" content={pageUrl} />}
+    {shareImageUrl && <meta property="og:image" content={shareImageUrl} />}
+    {shareImageUrl && <meta property="og:image:alt" content="Lísia Helena Guerra, síndica profissional" />}
+    <meta name="twitter:card" content={shareImageUrl ? "summary_large_image" : "summary"} />
   </head>
   <body
     class="font-body text-on-surface selection:bg-primary selection:text-on-primary"
