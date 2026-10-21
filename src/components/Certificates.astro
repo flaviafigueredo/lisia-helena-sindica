@@ -1,28 +1,53 @@
 ---
-import { Image } from "astro:assets";
+import CertificateCard from "./CertificateCard.astro";
 import certFacop from "../assets/certificados/3.jpeg";
 import certCursos1 from "../assets/certificados/1.jpeg";
 import certCursos2 from "../assets/certificados/2.jpeg";
+import certTownSq from "../assets/certificados/4.jpeg";
+import certHashtag from "../assets/certificados/5.jpeg";
 
-const featured = {
-  src: certFacop,
-  alt: "Certificado de conclusão do curso Formação Síndico Capacitado (FSC) pela FACOP, com 23 horas de carga horária",
-  label: "Formação Síndico Capacitado",
-  detail: "FACOP · 23 horas",
-};
-
-const others = [
+// Cada linha tem uma imagem vertical (5 colunas) e uma ou mais horizontais
+// empilhadas (7 colunas). `reverse` inverte os lados para alternar as linhas.
+const rows = [
   {
-    src: certCursos1,
-    alt: "Painel com certificados de cursos CondoHábil e Duarte Treinamentos concluídos por Lísia Helena Guerra",
-    label: "Cursos de Especialização",
-    detail: "CondoHábil · Duarte Treinamentos",
+    reverse: false,
+    tall: {
+      src: certFacop,
+      alt: "Certificado de conclusão do curso Formação Síndico Capacitado (FSC) pela FACOP, com 23 horas de carga horária",
+      label: "Formação Síndico Capacitado",
+      detail: "FACOP · 23 horas",
+    },
+    wide: [
+      {
+        src: certCursos1,
+        alt: "Painel com certificados de cursos CondoHábil e Duarte Treinamentos concluídos por Lísia Helena Guerra",
+        label: "Cursos de Especialização",
+        detail: "CondoHábil · Duarte Treinamentos",
+      },
+      {
+        src: certCursos2,
+        alt: "Painel com certificados de cursos de gestão condominial concluídos por Lísia Helena Guerra",
+        label: "Formação Contínua",
+        detail: "Escola CondoHábil",
+      },
+    ],
   },
   {
-    src: certCursos2,
-    alt: "Painel com certificados de cursos de gestão condominial concluídos por Lísia Helena Guerra",
-    label: "Formação Contínua",
-    detail: "Escola CondoHábil",
+    reverse: true,
+    tall: {
+      src: certHashtag,
+      alt: "Painel com certificados da Hashtag Treinamentos em inteligência artificial concluídos por Lísia Helena Guerra",
+      label: "Inteligência Artificial",
+      detail: "Hashtag Treinamentos",
+    },
+    wide: [
+      {
+        src: certTownSq,
+        alt: "Painel com certificados da TownSq concluídos por Lísia Helena Guerra, incluindo curso para síndicos e aula sobre assembleias",
+        label: "Capacitação para Síndicos",
+        detail: "TownSq",
+      },
+    ],
   },
 ];
 ---
@@ -48,64 +73,28 @@ const others = [
     </p>
   </div>
 
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-    <button
-      type="button"
-      class="js-cert-open lg:col-span-5 glass-panel p-3 text-left group hover:bg-surface-container/40 transition-all duration-500 cursor-zoom-in"
-      data-full={featured.src.src}
-      data-alt={featured.alt}
-      aria-label={`Ampliar: ${featured.label}`}
-    >
-      <div class="overflow-hidden bg-surface-dim">
-        <Image
-          src={featured.src}
-          alt={featured.alt}
-          widths={[400, 600, 800]}
-          sizes="(min-width: 1024px) 40vw, 100vw"
-          class="w-full h-auto opacity-90 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-700"
-        />
-      </div>
-      <div class="px-3 pt-5 pb-2">
-        <h3 class="font-headline text-xl text-white mb-1">{featured.label}</h3>
-        <p
-          class="font-label text-[10px] uppercase tracking-widest text-primary"
-        >
-          {featured.detail}
-        </p>
-      </div>
-    </button>
-
-    <div class="lg:col-span-7 flex flex-col gap-6">
-      {
-        others.map((cert) => (
-          <button
-            type="button"
-            class="js-cert-open glass-panel p-3 text-left group hover:bg-surface-container/40 transition-all duration-500 cursor-zoom-in"
-            data-full={cert.src.src}
-            data-alt={cert.alt}
-            aria-label={`Ampliar: ${cert.label}`}
-          >
-            <div class="overflow-hidden bg-surface-dim">
-              <Image
-                src={cert.src}
-                alt={cert.alt}
+  <div class="flex flex-col gap-6">
+    {
+      rows.map((row) => (
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <CertificateCard
+            {...row.tall}
+            widths={[400, 600, 800]}
+            sizes="(min-width: 1024px) 40vw, 100vw"
+            class={row.reverse ? "lg:col-span-5 lg:order-2" : "lg:col-span-5"}
+          />
+          <div class="lg:col-span-7 flex flex-col gap-6">
+            {row.wide.map((cert) => (
+              <CertificateCard
+                {...cert}
                 widths={[500, 800, 1100]}
                 sizes="(min-width: 1024px) 55vw, 100vw"
-                class="w-full h-auto opacity-90 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-700"
               />
-            </div>
-            <div class="px-3 pt-5 pb-2">
-              <h3 class="font-headline text-xl text-white mb-1">
-                {cert.label}
-              </h3>
-              <p class="font-label text-[10px] uppercase tracking-widest text-primary">
-                {cert.detail}
-              </p>
-            </div>
-          </button>
-        ))
-      }
-    </div>
+            ))}
+          </div>
+        </div>
+      ))
+    }
   </div>
 
   <dialog
